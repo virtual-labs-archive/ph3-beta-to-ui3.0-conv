@@ -5,7 +5,7 @@ from config import *
 from utils import *
 
 def build_exp(exp, broad_area_name, display_lab_name, lab_name, college_name, phase, broad_area_link, lab_link):    
-    script_cmd = "./%s '%s' '%s' '%s' '%s' '%s' '%s' '%s' '%s' '%s' %s %s" % (BUILD_SCRIPT, exp["repo"], exp['short-name'], exp['name'], ".", broad_area_name, display_lab_name, lab_name, college_name, phase, broad_area_link, lab_link)
+    script_cmd = "./%s '%s' '%s' '%s' '%s' '%s' '%s' '%s' '%s' '%s' '%s' %s %s" % (BUILD_SCRIPT, exp["repo"], exp["tag"], exp['short-name'], exp['name'], ".", broad_area_name, display_lab_name, lab_name, college_name, phase, broad_area_link, lab_link)
     try:
         (ret_code, output) = execute_command(script_cmd)
         print "script run successful"

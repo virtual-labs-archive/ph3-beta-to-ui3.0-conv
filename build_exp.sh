@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "number of arguments =  $#"
-if [ "$#" -ne 11 ]; then
+if [ "$#" -ne 12 ]; then
     echo "Usage: ./script.sh <url> 
         <ename> <location> <broad-area> 
         <display-lab-name> <lab-name> 
@@ -10,16 +10,17 @@ if [ "$#" -ne 11 ]; then
 fi
 
 url=$1
-EXP_SHORT_NAME=$2
-EXP_NAME=$3
-location=$4
-BROAD_AREA=$5
-DISPLAY_LAB_NAME=$6
-LAB_NAME=$7
-COLLEGE_NAME=$8
-PHASE=$9
-BROAD_AREA_LINK=${10}
-LAB_LINK=${11}
+tag=$2
+EXP_SHORT_NAME=$3
+EXP_NAME=$4
+location=$5
+BROAD_AREA=$6
+DISPLAY_LAB_NAME=$7
+LAB_NAME=$8
+COLLEGE_NAME=$9
+PHASE=${10}
+BROAD_AREA_LINK=${11}
+LAB_LINK=${12}
 
 
 rm -rf exprepos
@@ -34,6 +35,9 @@ cd exprepos; git clone $url; cd ../
 
 basename=$(basename $url)
 reponame=${basename%.*}
+
+## switch to the given tag
+cd exprepos/$reponame; git fetch --all; git checkout $tag; cd ../../
 
 template=ui3template
 
