@@ -33,7 +33,7 @@ def host_experiments():
         if (exp["deploy"]):
             lab_name = re.sub(r' +', '-', data["lab"].lower())
             lab_link = os.path.join(data["baseUrl"], lab_name)
-            exp_copy_loc = "/var/www/html/" + lab_name + "/exp/"
+            exp_copy_loc = "/var/www/html/" + lab_name + "/stage/exp/"
             build_exp(exp, data["broadArea"]["name"], data["lab"], lab_name, data['collegeName'], data['phase'], data["broadArea"]["link"], lab_link)
             copy_exps_to_server("expbuilds/" + exp["short-name"], exp_copy_loc)
     return ""
