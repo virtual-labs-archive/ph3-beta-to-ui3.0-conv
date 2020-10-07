@@ -61,7 +61,7 @@ head_snippet=$(tr -d '\n' < analytics/headSnippet)
 body_snippet=$(tr -d '\n' < analytics/bodySnippet)
 
 function insert_analytics_snippets () {
-    fn=$1
+    fn="$1"
     bodytag=$(grep "<body" $fn)
 
     if [ $(grep -c "window.dataLayer" $fn) == 0 ] && [ -n "$bodytag" ]
