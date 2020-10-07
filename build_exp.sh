@@ -61,13 +61,13 @@ head_snippet=$(tr -d '\n' < analytics/headSnippet)
 body_snippet=$(tr -d '\n' < analytics/bodySnippet)
 
 function insert_analytics_snippets () {
-    fn="$1"
-    bodytag=$(grep "<body" $fn)
+    fn=$1
+    bodytag=$(grep "<body" "$fn")
 
-    if [ $(grep -c "window.dataLayer" $fn) == 0 ] && [ -n "$bodytag" ]
+    if [ $(grep -c "window.dataLayer" "$fn") == 0 ] && [ -n "$bodytag" ]
     then
-        sed -i "s@<head>@<head>${head_snippet//&/\\&}@" $fn
-        sed -i "s@$bodytag@$bodytag${body_snippet//&/\\&}@" $fn
+        sed -i "s@<head>@<head>${head_snippet//&/\\&}@" "$fn"
+        sed -i "s@$bodytag@$bodytag${body_snippet//&/\\&}@" "$fn"
     else
         echo "analytics script already present."
         echo
@@ -81,8 +81,8 @@ echo $pages
 # insert snippets in all html pages
 for p in $pages
 do
-    echo $p
-    insert_analytics_snippets $p
+    echo "$p"
+    insert_analytics_snippets "$p"
 done
 
 
