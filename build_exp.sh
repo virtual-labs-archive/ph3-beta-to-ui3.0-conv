@@ -64,7 +64,7 @@ function insert_analytics_snippets () {
     fn=$1
     bodytag=$(grep "<body" $fn)
 
-    if [ $(grep -c "window.dataLayer" $fn) == 0 ] && [ -n $bodytag ]
+    if [ $(grep -c "window.dataLayer" $fn) == 0 ] && [ -n "$bodytag" ]
     then
         sed -i "s@<head>@<head>${head_snippet//&/\\&}@" $fn
         sed -i "s@$bodytag@$bodytag${body_snippet//&/\\&}@" $fn
