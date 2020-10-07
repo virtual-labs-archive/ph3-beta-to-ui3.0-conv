@@ -1,0 +1,29 @@
+#!/bin/bash
+root=expbuilds
+chmod -R u+rwx $root
+head_snippet=$(tr -d '\n' < analytics/headSnippet)
+body_snippet=$(tr -d '\n' < analytics/bodySnippet)
+topic_map=$(tr -d '\n' < analytics/topic_config.json)
+function insert_analytics_snippets () {
+    fn=$1
+    
+    if [ $(grep -c "window.dataLayer" $fn) == 0 ]
+    then
+        sed -i "s@<head>@<head>${head_snippet//&/\\&}@" $fn
+        sed -i "s@<body>@<body>${body_snippet//&/\\&}@" $fn
+    else
+        echo "analytics script already present."
+        echo
+    fi
+}   
+# get the list of html pages
+pages=$(find $root -not -path "*/themes/*" -type f -name "*.html")
+
+# insert snippets in all html pages
+for p in $pages
+do
+    #echo $p
+    insert_analytics_snippets $p
+done
+
+find $root -name "*.html" -exec sed -i "s@TOPIC_MAP@$topic_map@" {} \;
